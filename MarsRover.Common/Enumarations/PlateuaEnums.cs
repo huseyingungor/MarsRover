@@ -12,9 +12,10 @@ namespace MarsRover.Common.Enumarations
             Size = 2
         }
 
-        public static class PlateuaErrors
+        public static class Errors
         {
-            public const string WrongSize = "Plateau size is not valid!";
+            public const string WrongSize = "Plateau size is not valid! Try again.";
+            public const string EmptySize = "Plateau size cannot be empty! Try again.";
         }
     }
 }

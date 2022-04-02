@@ -1,6 +1,6 @@
 ﻿namespace MarsRover.Models
 {
-    public class Plateau : BaseServiceModel
+    public class Plateau
     {
         public int XLength { get; set; }
         public int YLength { get; set; }
