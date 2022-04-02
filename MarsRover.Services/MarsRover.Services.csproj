@@ -4,4 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MarsRover.Common\MarsRover.Common.csproj" />
+    <ProjectReference Include="..\MarsRover.Interfaces\MarsRover.Interfaces.csproj" />
+    <ProjectReference Include="..\MarsRover.Models\MarsRover.Models.csproj" />
+  </ItemGroup>
+
 </Project>
