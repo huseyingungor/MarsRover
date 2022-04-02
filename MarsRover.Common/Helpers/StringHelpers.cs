@@ -1,4 +1,5 @@
 ﻿using MarsRover.Common.Enumarations;
+using MarsRover.Models;
 using MarsRover.Models.HelperModels;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace MarsRover.Common.Helpers
             if (string.IsNullOrEmpty(plateuaSize))
             {
                 result.IsSuccess = false;
-                result.Description = PlateuaEnums.PlateuaErrors.WrongSize;
+                result.Description = PlateuaEnums.Errors.EmptySize;
                 return result;
             }
 
@@ -24,7 +25,7 @@ namespace MarsRover.Common.Helpers
             if (sizeList.Count != (int)PlateuaEnums.PlateuaProperties.Size)
             {
                 result.IsSuccess = false;
-                result.Description = PlateuaEnums.PlateuaErrors.WrongSize;
+                result.Description = PlateuaEnums.Errors.WrongSize;
                 return result;
             }
 
@@ -33,6 +34,55 @@ namespace MarsRover.Common.Helpers
             result.IsSuccess = Int32.TryParse(sizeList[0], out x) && Int32.TryParse(sizeList[1], out y);
             result.XLength = x;
             result.YLength = y;
+
+            if (!result.IsSuccess)
+                result.Description = PlateuaEnums.Errors.WrongSize;
+
+            return result;
+        }
+
+        public static RoverParametersControlModel RoverParametersControl(string roverParameters, Plateau plateau)
+        {
+            var result = new RoverParametersControlModel();
+
+            if (string.IsNullOrEmpty(roverParameters))
+            {
+                result.IsSuccess = false;
+                result.Description = RoverEnums.Errors.EmptyParameters;
+                return result;
+            }
+
+            List<string> parameterList = new List<string>();
+            parameterList.AddRange(roverParameters.Split(" "));
+
+            if (parameterList.Count != (int)RoverEnums.Properties.ParametersCount)
+            {
+                result.IsSuccess = false;
+                result.Description = RoverEnums.Errors.WrongParameters;
+                return result;
+            }
+
+            int x = 0, y = 0;
+            string direction = parameterList[2].ToUpper();
+            bool directionControl = direction.Length == 1 && (direction == RoverEnums.Directions.North || direction == RoverEnums.Directions.East || direction == RoverEnums.Directions.South || direction == RoverEnums.Directions.West);
+            result.IsSuccess = Int32.TryParse(parameterList[0], out x) && Int32.TryParse(parameterList[1], out y) && directionControl;
+            result.XPosition = x;
+            result.YPosition = y;
+            result.Direction = direction;
+
+            if (!result.IsSuccess)
+                result.Description = RoverEnums.Errors.WrongParameters;
+
+            if (result.XPosition > plateau.XLength || result.XPosition < 0 || result.YPosition > plateau.YLength || result.YPosition < 0)
+            {
+                result.IsSuccess = false;
+                result.Description = RoverEnums.Errors.LocationNotInPlateau;
+            }
+
+            if (!directionControl)
+            {
+                result.Description = RoverEnums.Errors.NotValidRoverPosition;
+            }
 
             return result;
         }
