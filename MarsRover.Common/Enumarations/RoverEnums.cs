@@ -17,6 +17,7 @@
             public const string LocationNotInPlateau = "Rover location is not in plateau! Try again.";
             public const string NotValidRoverPosition = "Rover position is not valid! Try again.";
             public const string NotValidCommands = "Commands are not valid! Try again.";
+            public const string NotValidFinalPlace = "The final place is not valid! Try again.";
         }
 
         public enum Properties
@@ -26,9 +27,9 @@
 
         public static class Commands
         {
-            public const string SpinLeft = "L";
-            public const string SpinRight = "R";
-            public const string MoveForward = "M";
+            public const char SpinLeft = 'L';
+            public const char SpinRight = 'R';
+            public const char MoveForward = 'M';
         }
     }
 }
