@@ -3,6 +3,7 @@ using MarsRover.Models;
 using MarsRover.Models.HelperModels;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace MarsRover.Common.Helpers
 {
@@ -85,6 +86,21 @@ namespace MarsRover.Common.Helpers
             }
 
             return result;
+        }
+
+        public static string MovementsControl(string movements)
+        {
+            if (string.IsNullOrEmpty(movements))
+                return string.Empty;
+
+            movements = movements.Trim().ToUpper();
+
+            bool stringControl = Regex.IsMatch(movements, $"^[{RoverEnums.Commands.SpinLeft}{RoverEnums.Commands.SpinRight}{RoverEnums.Commands.MoveForward}]*$");
+
+            if (!stringControl)
+                return String.Empty;
+            else
+                return movements;
         }
     }
 }
