@@ -1,4 +1,5 @@
 ﻿using MarsRover.Common.Enumarations;
+using MarsRover.Common.Helpers;
 using MarsRover.Interfaces.Services;
 using MarsRover.Models;
 using MarsRover.Services;
@@ -24,11 +25,14 @@ namespace MarsRover
 
             Plateau plateau = CreatePlateau();
 
-            //kaç adet rover olacağı belli olmadığı için
+            //It is not clear how many rovers there are.
             for (int i = 1; i < int.MaxValue; i++)
             {
                 Rover rover = CreateRover(plateau);
                 Console.WriteLine($"{i}. Rover coordinate: X:{rover.XPosition} - Y:{rover.YPosition} - Direction:{rover.Direction}");
+
+                string commands = GetRoverCommands();
+
             }
 
             Console.WriteLine($"Plateau Size: {plateau.XLength} - {plateau.YLength}");
@@ -85,6 +89,33 @@ namespace MarsRover
                 else
                 {
                     Console.WriteLine(roverCreateResult.ErrorDescription);
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Get valid rover movement commands. Using "for loop" for try again if input is not valid. 
+        /// </summary>
+        /// <returns></returns>
+        public static string GetRoverCommands()
+        {
+            string result = string.Empty;
+
+            for (int i = 0; i < int.MaxValue; i++)
+            {
+                string commands = Console.ReadLine();
+                commands = StringHelpers.MovementsControl(commands);
+
+                if (string.IsNullOrEmpty(commands))
+                {
+                    Console.WriteLine(RoverEnums.Errors.NotValidCommands);
+                }
+                else
+                {
+                    result = commands;
+                    break;
                 }
             }
 
