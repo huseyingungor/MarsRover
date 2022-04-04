@@ -1,5 +1,4 @@
-﻿using MarsRover.Common.Enumarations;
-using MarsRover.Interfaces.Services;
+﻿using MarsRover.Interfaces.Services;
 using MarsRover.Models;
 using System;
 
@@ -16,21 +15,18 @@ namespace MarsRover.ServiceCallHelpers
         {
             Plateau result = new Plateau(0, 0);
 
-            for (int i = 0; i < int.MaxValue; i++)
+            string plateauSize = Console.ReadLine();
+
+            var plateauSizeResult = _plateauService.Create(plateauSize);
+
+            if (plateauSizeResult.IsSuccess)
             {
-                string plateauSize = Console.ReadLine();
-
-                var plateauSizeResult = _plateauService.Create(plateauSize);
-
-                if (plateauSizeResult.IsSuccess)
-                {
-                    result = plateauSizeResult.Plateau;
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine(plateauSizeResult.ErrorDescription);
-                }
+                return plateauSizeResult.Plateau;
+            }
+            else
+            {
+                Console.WriteLine(plateauSizeResult.ErrorDescription);
+                result = CreatePlateau(_plateauService);
             }
 
             return result;
