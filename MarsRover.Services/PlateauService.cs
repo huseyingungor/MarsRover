@@ -11,7 +11,7 @@ namespace MarsRover.Services
         {
             PlateuaCreateModel result = new PlateuaCreateModel();
 
-            var inputControlResult = StringHelpers.PlateuaSizeControl(plateuaSize);
+            var inputControlResult = StringHelper.PlateauSizeControl(plateuaSize);
             result.IsSuccess = inputControlResult.IsSuccess;
             result.ErrorDescription = inputControlResult.Description;
 

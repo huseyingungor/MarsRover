@@ -7,26 +7,26 @@ using System.Text.RegularExpressions;
 
 namespace MarsRover.Common.Helpers
 {
-    public static class StringHelpers
+    public static class StringHelper
     {
-        public static PlateuaSizeControlModel PlateuaSizeControl(string plateuaSize)
+        public static PlateuaSizeControlModel PlateauSizeControl(string plateuaSize)
         {
             var result = new PlateuaSizeControlModel();
 
             if (string.IsNullOrEmpty(plateuaSize))
             {
                 result.IsSuccess = false;
-                result.Description = PlateuaEnums.Errors.EmptySize;
+                result.Description = PlateauEnums.Errors.EmptySize;
                 return result;
             }
 
             List<string> sizeList = new List<string>();
             sizeList.AddRange(plateuaSize.Split(" "));
 
-            if (sizeList.Count != (int)PlateuaEnums.PlateuaProperties.Size)
+            if (sizeList.Count != (int)PlateauEnums.PlateauProperties.Size)
             {
                 result.IsSuccess = false;
-                result.Description = PlateuaEnums.Errors.WrongSize;
+                result.Description = PlateauEnums.Errors.WrongSize;
                 return result;
             }
 
@@ -37,7 +37,7 @@ namespace MarsRover.Common.Helpers
             result.YLength = y;
 
             if (!result.IsSuccess)
-                result.Description = PlateuaEnums.Errors.WrongSize;
+                result.Description = PlateauEnums.Errors.WrongSize;
 
             return result;
         }
@@ -82,7 +82,7 @@ namespace MarsRover.Common.Helpers
 
             if (!directionControl)
             {
-                result.Description = RoverEnums.Errors.NotValidRoverPosition;
+                result.Description = RoverEnums.Errors.NotValidRoverDirection;
             }
 
             return result;

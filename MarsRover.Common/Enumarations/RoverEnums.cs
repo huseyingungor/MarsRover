@@ -15,7 +15,7 @@
             public const string EmptyParameters = "Rover parameters are not valid! Try again.";
             public const string WrongParameters = "Rover cannot be created! Try again.";
             public const string LocationNotInPlateau = "Rover location is not in plateau! Try again.";
-            public const string NotValidRoverPosition = "Rover position is not valid! Try again.";
+            public const string NotValidRoverDirection = "Rover position is not valid! Try again.";
             public const string NotValidCommands = "Commands are not valid! Try again.";
             public const string NotValidFinalPlace = "The final place is not valid! Try again.";
         }
