@@ -12,7 +12,7 @@ namespace MarsRover.Services
         {
             RoverCreateModel result = new RoverCreateModel();
 
-            var inputControlResult = StringHelpers.RoverParametersControl(roverCreateParameters, plateau);
+            var inputControlResult = StringHelper.RoverParametersControl(roverCreateParameters, plateau);
 
             result.IsSuccess = inputControlResult.IsSuccess;
             result.ErrorDescription = inputControlResult.Description;

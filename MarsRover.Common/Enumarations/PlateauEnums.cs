@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
-
-namespace MarsRover.Common.Enumarations
+﻿namespace MarsRover.Common.Enumarations
 {
-    public  class PlateuaEnums
+    public  class PlateauEnums
     {
-        public enum PlateuaProperties
+        public enum PlateauProperties
         {
             Size = 2
         }

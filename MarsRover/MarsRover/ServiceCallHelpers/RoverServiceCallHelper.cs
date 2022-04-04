@@ -49,7 +49,7 @@ namespace MarsRover.ServiceCallHelpers
             for (int i = 0; i < int.MaxValue; i++)
             {
                 string commands = Console.ReadLine();
-                commands = StringHelpers.MovementsControl(commands);
+                commands = StringHelper.MovementsControl(commands);
 
                 if (string.IsNullOrEmpty(commands))
                 {

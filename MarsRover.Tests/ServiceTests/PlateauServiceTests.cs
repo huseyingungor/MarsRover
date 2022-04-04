@@ -6,11 +6,17 @@ namespace MarsRover.Tests
 {
     public class PlateauServiceTests
     {
+        PlateauService _plateauService;
+
+        public PlateauServiceTests()
+        {
+            _plateauService = new PlateauService();
+        }
+
         [Fact]
         public void CreatePlateauXValueEqual()
         {
-            PlateauService service = new PlateauService();
-            PlateuaCreateModel model = service.Create("3 5");
+            PlateuaCreateModel model = _plateauService.Create("3 5");
 
             Assert.Equal(3, model.Plateau.XLength);
         }
@@ -18,8 +24,7 @@ namespace MarsRover.Tests
         [Fact]
         public void CreatePlateauYValueEqual()
         {
-            PlateauService service = new PlateauService();
-            PlateuaCreateModel model = service.Create("3 5");
+            PlateuaCreateModel model = _plateauService.Create("3 5");
 
             Assert.Equal(5, model.Plateau.YLength);
         }
@@ -27,8 +32,7 @@ namespace MarsRover.Tests
         [Fact]
         public void CreatePlateauErrorControl()
         {
-            PlateauService service = new PlateauService();
-            PlateuaCreateModel model = service.Create("3 5 5");
+            PlateuaCreateModel model = _plateauService.Create("3 5 5");
 
             Assert.True(model.Plateau == null && model.IsSuccess == false);
         }
