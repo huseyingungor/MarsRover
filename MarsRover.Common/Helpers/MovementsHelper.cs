@@ -62,7 +62,7 @@ namespace MarsRover.Common.Helpers
 
         public static bool CommandsAreValid(Rover rover)
         {
-            return rover.XPosition >= 0 || rover.YPosition >= 0;
+            return rover.XPosition >= 0 && rover.YPosition >= 0;
         }
     }
 }
