@@ -18,21 +18,18 @@ namespace MarsRover.ServiceCallHelpers
         {
             Rover result = new Rover(0, 0, RoverEnums.Directions.North);
 
-            for (int i = 0; i < int.MaxValue; i++)
+            string roverParameters = Console.ReadLine();
+
+            var roverCreateResult = _roverService.Create(roverParameters, plateau);
+
+            if (roverCreateResult.IsSuccess)
             {
-                string roverParameters = Console.ReadLine();
-
-                var roverCreateResult = _roverService.Create(roverParameters, plateau);
-
-                if (roverCreateResult.IsSuccess)
-                {
-                    result = roverCreateResult.Rover;
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine(roverCreateResult.ErrorDescription);
-                }
+                return roverCreateResult.Rover;
+            }
+            else
+            {
+                Console.WriteLine(roverCreateResult.ErrorDescription);
+                result = CreateRover(_roverService, plateau);
             }
 
             return result;
@@ -46,29 +43,20 @@ namespace MarsRover.ServiceCallHelpers
         /// <param name="rover"></param>
         public static void GetAndRunCommands(IRoverService _roverService, Plateau plateau, Rover rover)
         {
-            for (int i = 0; i < int.MaxValue; i++)
+            string commands = Console.ReadLine();
+            commands = StringHelper.MovementsControl(commands);
+            var result = _roverService.RunRoverCommands(plateau, rover, commands);
+
+            if (result.IsSuccess)
             {
-                string commands = Console.ReadLine();
-                commands = StringHelper.MovementsControl(commands);
-
-                if (string.IsNullOrEmpty(commands))
-                {
-                    Console.WriteLine(RoverEnums.Errors.NotValidCommands);
-                    continue;
-                }
-
-                var result = _roverService.RunRoverCommands(plateau, rover, commands);
-
-                if (result.IsSuccess)
-                {
-                    Console.WriteLine($"{result.Rover.XPosition} {result.Rover.YPosition} {result.Rover.Direction}");
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine(result.ErrorDescription);
-                }
+                Console.WriteLine($"{result.Rover.XPosition} {result.Rover.YPosition} {result.Rover.Direction}");
             }
+            else
+            {
+                Console.WriteLine(result.ErrorDescription);
+                GetAndRunCommands(_roverService, plateau, rover);
+            }
+
         }
     }
 }

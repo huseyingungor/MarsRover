@@ -66,6 +66,7 @@ namespace MarsRover.Common.Helpers
             int x = 0, y = 0;
             string direction = parameterList[2].ToUpper();
             bool directionControl = direction.Length == 1 && (direction == RoverEnums.Directions.North || direction == RoverEnums.Directions.East || direction == RoverEnums.Directions.South || direction == RoverEnums.Directions.West);
+
             result.IsSuccess = Int32.TryParse(parameterList[0], out x) && Int32.TryParse(parameterList[1], out y) && directionControl;
             result.XPosition = x;
             result.YPosition = y;

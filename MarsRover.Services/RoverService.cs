@@ -27,6 +27,11 @@ namespace MarsRover.Services
 
         public RoverMovementsModel RunRoverCommands(Plateau plateau, Rover rover, string commands)
         {
+            if (string.IsNullOrEmpty(commands))
+            {
+                return new RoverMovementsModel { IsSuccess = false, ErrorDescription = RoverEnums.Errors.NotValidCommands };
+            }
+
             RoverMovementsModel result = new RoverMovementsModel();
 
             foreach (var movement in commands)
